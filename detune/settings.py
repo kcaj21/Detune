@@ -60,6 +60,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -119,5 +120,8 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
+MEDIA_ROOT = BASE_DIR / 'songs'
+MEDIA_URL='/songs/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
