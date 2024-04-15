@@ -30,7 +30,6 @@ def home_view(request):
             
             video.download(filename='temp_audio.mp3', output_path='songs')
             
-            #librosa will load the mp3 and store the time series (y) and sample rate (sr) variables
             
             fs = FileSystemStorage()
             
@@ -39,6 +38,8 @@ def home_view(request):
             # convert mp3 to wav file - calls subprocess to convert with ffmpeg package on local machine. Need to ensure ffmpeg is installed on VM in production (if sticking with this method, PyDub is another option)
             subprocess.call(['ffmpeg', '-i', os.getcwd() + temp_url, 
                  'songs/converted_to_wav_file.wav'])
+            
+            #librosa will load the mp3 and store the time series (y) and sample rate (sr) variables
                         
             # y, sr = librosa.load('songs/temp_audio.mp3')
             
