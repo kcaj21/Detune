@@ -5,8 +5,9 @@ from .forms import *
 from django.core.files.storage import FileSystemStorage
 import os
 import glob
-import librosa
-import soundfile
+import subprocess
+# import librosa
+# import soundfile
 
 
 def home_view(request):
@@ -34,14 +35,18 @@ def home_view(request):
             fs = FileSystemStorage()
             
             temp_url = fs.url('temp_audio.mp3')
-                        
-            y, sr = librosa.load('songs/temp_audio.mp3')
             
-            new_y = librosa.effects.pitch_shift(y, sr = sr, n_steps=1)
+            # convert mp3 to wav file - calls subprocess to convert with ffmpeg package on local machine. Need to ensure ffmpeg is installed on VM in production (if sticking with this method, PyDub is another option)
+            subprocess.call(['ffmpeg', '-i', os.getcwd() + temp_url, 
+                 'songs/converted_to_wav_file.wav'])
+                        
+            # y, sr = librosa.load('songs/temp_audio.mp3')
+            
+            # new_y = librosa.effects.pitch_shift(y, sr = sr, n_steps=1)
             
             #soundfile does not support mp3, need to find way to convert from wav back to mp3
             
-            soundfile.write("songs/pitchShifted.wav", new_y, sr)
+            # soundfile.write("songs/pitchShifted.wav", new_y, sr)
             
             # print(new_y)
             
