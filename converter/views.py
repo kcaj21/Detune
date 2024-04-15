@@ -6,8 +6,8 @@ from django.core.files.storage import FileSystemStorage
 import os
 import glob
 import subprocess
-# import librosa
-# import soundfile
+import librosa
+import soundfile
 
 
 def home_view(request):
@@ -41,17 +41,20 @@ def home_view(request):
             
             #librosa will load the mp3 and store the time series (y) and sample rate (sr) variables
                         
-            # y, sr = librosa.load('songs/temp_audio.mp3')
+            y, sr = librosa.load('songs/converted_to_wav_file.wav')
             
-            # new_y = librosa.effects.pitch_shift(y, sr = sr, n_steps=1)
+            new_y = librosa.effects.pitch_shift(y, sr = sr, n_steps=-1)
             
             #soundfile does not support mp3, need to find way to convert from wav back to mp3
             
-            # soundfile.write("songs/pitchShifted.wav", new_y, sr)
+            soundfile.write("songs/pitchShifted.wav", new_y, sr)
             
             # print(new_y)
             
-            return render(request, 'play_audio.html', {'mp3_url': temp_url})
+            convertedWav_url = fs.url('pitchShifted.wav')
+            
+            
+            return render(request, 'play_audio.html', {'mp3_url': convertedWav_url})
 
     else:
         form = YouTubeForm()
