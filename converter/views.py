@@ -42,6 +42,8 @@ def home_view(request):
                  'songs/converted_to_wav_file.wav'])
             
             #librosa will load the mp3 and store the time series (y) and sample rate (sr) variables
+            
+            #Try instead of librosa: https://pyrubberband.readthedocs.io/en/stable/generated/pyrubberband.pyrb.pitch_shift.html
                         
             y, sr = librosa.load('songs/converted_to_wav_file.wav')
             
