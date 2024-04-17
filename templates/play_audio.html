@@ -2,9 +2,10 @@
 <html>
 <head>
     <title>Play Audio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <audio controls src="{{ mp3_url }}">
+<body class="bg-[#36393e] flex flex-col justify-center h-screen">
+    <audio class="w-[50%] items-center" controls src="{{ convertedWav_url }}">
     </audio>
 </body>
 </html>
