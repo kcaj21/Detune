@@ -9,6 +9,7 @@ import glob
 import subprocess
 import librosa
 import soundfile
+import pyrubberband
 
 
 def home_view(request):
@@ -45,9 +46,13 @@ def home_view(request):
             
             #Try instead of librosa: https://pyrubberband.readthedocs.io/en/stable/generated/pyrubberband.pyrb.pitch_shift.html
                         
-            y, sr = librosa.load('songs/converted_to_wav_file.wav')
+            # y, sr = librosa.load('songs/converted_to_wav_file.wav')
             
-            new_y = librosa.effects.pitch_shift(y, sr = sr, n_steps=form_steps)
+            # new_y = librosa.effects.pitch_shift(y, sr = sr, n_steps=form_steps)
+            
+            y, sr = soundfile.read('songs/converted_to_wav_file.wav')
+            
+            new_y = pyrubberband.pitch_shift(y, sr, form_steps)
             
             #soundfile does not support mp3, need to find way to convert from wav back to mp3
             
